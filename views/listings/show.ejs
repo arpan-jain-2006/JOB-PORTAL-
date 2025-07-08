@@ -1,0 +1,40 @@
+<% layout("/layouts/boilerplate") %>
+
+<body>
+
+<div class="container mt-5 mb-5">
+  <div class="text-center mb-4">
+    <h2 class="fw-bold text-primary">📄 All Job Listings</h2>
+    <p class="text-muted">Here are all the jobs currently posted. Apply quickly before the deadlines pass!</p>
+  </div>
+
+  <div class="card shadow-sm border-0">
+    <div class="card-body p-4">
+      <ul class="list-group list-group-flush mb-4">
+        <li class="list-group-item"><strong>🔹 Title:</strong> <%= listing.title %></li>
+        <li class="list-group-item"><strong>📃 Description:</strong> <%= listing.description %></li>
+        <li class="list-group-item"><strong>🏢 Company:</strong> <%= listing.company %></li>
+        <li class="list-group-item"><strong>📍 Location:</strong> <%= listing.location %></li>
+        <li class="list-group-item"><strong>💰 Salary:</strong> ₹<%= listing.salary %></li>
+        <li class="list-group-item"><strong>🕒 Type:</strong> <%= listing.type %></li>
+        <li class="list-group-item"><strong>🛠️ Skills:</strong> <%= listing.skillsRequired.join(", ") %></li>
+        <li class="list-group-item"><strong>📈 Experience:</strong> <%= listing.experience %></li>
+        <li class="list-group-item"><strong>📧 Contact:</strong> <%= listing.contactEmail %></li>
+        <li class="list-group-item"><strong>📅 Apply By:</strong> <%= listing.applyBy ? listing.applyBy.toDateString() : 'N/A' %></li>
+      </ul>
+
+      <div class="text-center">
+        <a href="/job/<%= listing._id%>/apply" class="btn btn-success btn-lg px-5">
+          ✍️ Apply Now
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+  
+
+    
+</body>

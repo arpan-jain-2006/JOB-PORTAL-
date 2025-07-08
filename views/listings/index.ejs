@@ -1,0 +1,36 @@
+<% layout("/layouts/boilerplate") %>
+<body style="background-color: bisque;">
+    <!-- <form method="get" action="/job/new">
+        <Button>Create New Job</Button>
+    </form> -->
+    <!-- <br><br> -->
+    <!-- <ul>
+        <% for(let jobs of alljobs){%>
+            <li><a href="/job/<%=jobs._id%>"><%=jobs.title%></a></li>
+        <%}%>
+    </ul> -->
+
+    <div class="container mt-5 mb-5 ">
+  <div class="row">
+    <% for (let jobs of alljobs) { %>
+      <div class="col-md-6 col-lg-4 mb-4 love">
+        <div class="card shadow-sm h-100 border-0 job">
+          <div class="card-body d-flex flex-column justify-content-between  hell">
+            <div>
+              <h5 class="card-title text-primary bittu">🧑‍💼 <%= jobs.title %></h5>
+              <p class="card-text arpan"><strong>🏢 Company:</strong> <%= jobs.company %></p>
+              <p class="card-text arpan"><strong>📍 Location:</strong> <%= jobs.location %></p>
+              <p class="card-text arpan"><strong>💰 Salary:</strong> ₹<%= jobs.salary || "Not Disclosed" %></p>
+              <p class="card-text arpan"><strong>🕒 Type:</strong> <%= jobs.type %></p>
+            </div>
+            <a href="/job/<%= jobs._id %>" class="btn btn-success mt-3 w-100 jain">✍️ View & Apply</a>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+    
+    
+</body>

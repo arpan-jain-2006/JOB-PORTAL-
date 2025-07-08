@@ -1,0 +1,72 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+
+
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header text-center bg-dark text-white py-2">
+      <h4>🧑‍💼 Post New Job</h4>
+    </div>
+    <div class="card-body">
+      <form action="/job" method="POST">
+        <div class="mb-2">
+          <label class="form-label" for="title">Job Title</label>
+          <input type="text" id="title" name="job[title]" class="form-control form-control-sm" required />
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label" for="description">Description</label>
+          <textarea id="description" name="job[description]" class="form-control form-control-sm" rows="3" required></textarea>
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label" for="company">Company Name</label>
+          <input type="text" id="company" name="job[company]" class="form-control form-control-sm" required />
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-4">
+            <label class="form-label" for="location">Location</label>
+            <input type="text" id="location" name="job[location]" class="form-control form-control-sm" value="Remote" />
+          </div>
+          <div class="col-md-4">
+            <label class="form-label" for="salary">Salary</label>
+            <input type="text" id="salary" name="job[salary]" class="form-control form-control-sm" />
+          </div>
+          <div class="col-md-4">
+            <label class="form-label" for="type">Job Type</label>
+            <select id="type" name="job[type]" class="form-select form-select-sm">
+              <option value="Full-time">Full-time</option>
+              <option value="Part-time">Part-time</option>
+              <option value="Internship">Internship</option>
+              <option value="Freelance">Freelance</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-4">
+            <label class="form-label" for="skillsRequired">Skills</label>
+            <input type="text" id="skillsRequired" name="job[skillsRequired]" class="form-control form-control-sm" />
+          </div>
+          <div class="col-md-4">
+            <label class="form-label" for="experience">Experience</label>
+            <input type="text" id="experience" name="job[experience]" class="form-control form-control-sm" />
+          </div>
+          <div class="col-md-4">
+            <label class="form-label" for="applyBy">Apply By</label>
+            <input type="date" id="applyBy" name="job[applyBy]" class="form-control form-control-sm" />
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label" for="contactEmail">Contact Email</label>
+          <input type="email" id="contactEmail" name="job[contactEmail]" class="form-control form-control-sm" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 py-1">🚀 Post Job</button>
+      </form>
+    </div>
+  </div>
+</div>
+</body>

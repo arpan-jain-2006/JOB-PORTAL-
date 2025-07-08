@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Edit Job Listing</h1>
+
+<form method="post" action="/job/<%= listing._id %>?_method=PUT">
+  <label for="title">Job Title:</label><br />
+  <input type="text" id="title" name="listing[title]" value="<%= listing.title %>" required /><br /><br />
+
+  <label for="description">Description:</label><br />
+  <textarea id="description" name="listing[description]" required><%= listing.description %></textarea><br /><br />
+
+  <label for="company">Company Name:</label><br />
+  <input type="text" id="company" name="listing[company]" value="<%= listing.company %>" required /><br /><br />
+
+  <label for="location">Location:</label><br />
+  <input type="text" id="location" name="listing[location]" value="<%= listing.location %>" /><br /><br />
+
+  <label for="salary">Salary:</label><br />
+  <input type="text" id="salary" name="listing[salary]" value="<%= listing.salary %>" /><br /><br />
+
+  <label for="type">Job Type:</label><br />
+  <select id="type" name="listing[type]">
+    <option value="Full-time" <%= listing.type === "Full-time" ? "selected" : "" %>>Full-time</option>
+    <option value="Part-time" <%= listing.type === "Part-time" ? "selected" : "" %>>Part-time</option>
+    <option value="Internship" <%= listing.type === "Internship" ? "selected" : "" %>>Internship</option>
+    <option value="Freelance" <%= listing.type === "Freelance" ? "selected" : "" %>>Freelance</option>
+  </select><br /><br />
+
+  <label for="skillsRequired">Skills (comma-separated):</label><br />
+  <input type="text" id="skillsRequired" name="listing[skillsRequired]" value="<%= listing.skillsRequired.join(', ') %>" /><br /><br />
+
+  <label for="experience">Experience:</label><br />
+  <input type="text" id="experience" name="listing[experience]" value="<%= listing.experience %>" /><br /><br />
+
+  <label for="contactEmail">Contact Email:</label><br />
+  <input type="email" id="contactEmail" name="listing[contactEmail]" value="<%= listing.contactEmail %>" required /><br /><br />
+
+  <label for="applyBy">Apply By:</label><br />
+  <input type="date" id="applyBy" name="listing[applyBy]"
+         value="<%= listing.applyBy ? listing.applyBy.toISOString().substring(0, 10) : '' %>" /><br /><br />
+
+  <button type="submit">Update Job</button>
+</form>
+    
+</body>
+</html>

@@ -1,0 +1,194 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+  /* ======= ANIMATED BACKGROUND ======= */
+  .login-container {
+    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* ======= GLASS CARD ======= */
+  .login-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transform: translateY(0);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  /* ======= ANIMATED HEADER ======= */
+  .card-header {
+    background: linear-gradient(90deg, #ff8a00, #e52e71) !important;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.2), 
+      transparent);
+    transition: 0.5s;
+  }
+  
+  .card-header:hover::after {
+    left: 100%;
+  }
+
+  /* ======= INPUT ANIMATIONS ======= */
+  .form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white !important;
+    transition: all 0.3s;
+  }
+  
+  .form-control:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #ff8a00;
+    box-shadow: 0 0 0 0.25rem rgba(255, 138, 0, 0.25);
+  }
+  
+  .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
+
+  /* ======= BUTTON EFFECTS ======= */
+  .login-btn {
+    background: linear-gradient(45deg, #ff8a00, #e52e71);
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .login-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.4), 
+      transparent);
+    transition: 0.5s;
+    z-index: -1;
+  }
+  
+  .login-btn:hover::before {
+    left: 100%;
+  }
+
+  /* ======= LINK EFFECTS ======= */
+  .signup-link a {
+    color: #ff8a00;
+    text-decoration: none;
+    position: relative;
+  }
+  
+  .signup-link a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: #e52e71;
+    transition: width 0.3s;
+  }
+  
+  .signup-link a:hover::after {
+    width: 100%;
+  }
+</style>
+
+<body>
+<div class="login-container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4">
+        <div class="login-card card shadow">
+          <div class="card-header text-white text-center py-3">
+            <h4 class="mb-0">🔐 Create an Account!</h4>
+          </div>
+          <div class="card-body p-4">
+            <form action="/signup" method="POST">
+              <!-- Email Field -->
+              <div class="mb-4">
+                <label class="form-label text-white">Name</label>
+                <input 
+                  type="text" 
+                  name="name" 
+                  class="form-control form-control-lg" 
+                  placeholder="Your Name"
+                  required
+                >
+              </div>
+              
+              <!-- Password Field -->
+              <div class="mb-4">
+                <label class="form-label text-white">Password</label>
+                <input 
+                  type="email" 
+                  name="email" 
+                  class="form-control form-control-lg" 
+                  placeholder="you@example.com"
+                  required
+                >
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label text-white">Password</label>
+                <input 
+                  type="password" 
+                  name="password" 
+                  class="form-control form-control-lg" 
+                  placeholder="........"
+                  required
+                >
+              </div>
+              
+              <!-- Submit Button -->
+              <button type="submit" class="login-btn btn btn-primary btn-lg w-100 py-2 mt-2">
+                🚀 Sign Up
+              </button>
+              
+              <!-- Signup Link -->
+              <div class="signup-link text-center mt-4">
+                <small class="text-white-50">
+                  Already have an Account? <a href="/login">Login here</a>
+                </small>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

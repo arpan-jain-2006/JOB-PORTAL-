@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top px-3">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <i class="fa-regular fa-compass"></i>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/job">All Jobs</a>
+        <a class="nav-link" href="/job/new">Create New Jobs</a>
+      </div>
+
+      <!-- 🔍 Search Form -->
+    <form class="d-flex mx-auto" role="search" action="/search" method="GET" style="width: 300px;">
+    <input
+      class="form-control me-2 rounded-pill px-3"
+      type="search"
+      name="query"
+      placeholder="Search Jobs..."
+      aria-label="Search"
+    />
+    <button class="btn btn-outline-success rounded-pill px-4" type="submit">Search</button>
+  </form>
+    </div>
+  </div>
+</nav>

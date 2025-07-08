@@ -1,0 +1,54 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+<div class="container mt-5">
+  <div class="card shadow">
+    <div class="card-header text-center bg-primary text-white">
+      <h2>Apply for the role of <%= apply.title %></h2>
+    </div>
+    <div class="card-body">
+      <form
+        action="/job/<%= apply._id %>/apply"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="mb-3">
+          <label for="fullname" class="form-label">Full Name</label>
+          <input type="text" id="fullname" name="fullname" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" id="email" name="email" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone Number</label>
+          <input type="tel" id="phone" name="phone" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="resume" class="form-label">Resume Link or File Name</label>
+          <input type="file" id="resume" name="resume" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="coverletter" class="form-label">Cover Letter</label>
+          <textarea
+            id="coverletter"
+            name="coverletter"
+            rows="5"
+            class="form-control"
+            placeholder="Write a short message..."
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Submit Application</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+</body>

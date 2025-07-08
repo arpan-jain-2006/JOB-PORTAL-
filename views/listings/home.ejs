@@ -1,0 +1,884 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    /*======= BASE STYLES =======*/
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap');
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #0f0c29;
+        background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+        color: white;
+        overflow-x: hidden;
+    }
+
+    /*======= GLOWING HERO SECTION =======*/
+    .hero {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        padding: 0 20px;
+    }
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,0,255,0.1) 0%, rgba(0,255,255,0.1) 50%, transparent 70%);
+        animation: rotate 15s linear infinite;
+        z-index: -1;
+    }
+    .hero::after {
+        content: '';
+        position: absolute;
+        bottom: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(0,255,255,0.1) 0%, rgba(255,0,255,0.1) 50%, transparent 70%);
+        animation: rotate 20s linear infinite reverse;
+        z-index: -1;
+    }
+    .hero-content {
+        max-width: 900px;
+        padding: 40px;
+        position: relative;
+    }
+    h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 5rem;
+        margin-bottom: 20px;
+        background: linear-gradient(45deg, #ff8a00, #e52e71, #6a11cb);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: fadeIn 1s ease-out;
+        line-height: 1.1;
+        text-shadow: 0 0 20px rgba(255, 138, 0, 0.3);
+    }
+    .tagline {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+        opacity: 0.9;
+        animation: fadeIn 1s 0.3s forwards;
+        font-weight: 300;
+    }
+    .search-bar {
+        max-width: 700px;
+        margin: 0 auto 40px;
+        position: relative;
+        animation: fadeIn 1s 0.6s forwards;
+        opacity: 0;
+    }
+    .search-bar input {
+        width: 100%;
+        padding: 18px 30px;
+        border-radius: 50px;
+        border: none;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        color: white;
+        font-size: 1.1rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s;
+    }
+    .search-bar input:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 0 30px rgba(255, 138, 0, 0.2);
+    }
+    .search-bar button {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        background: linear-gradient(45deg, #ff8a00, #e52e71);
+        border: none;
+        color: white;
+        padding: 13px 25px;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    .search-bar button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 138, 0, 0.4);
+    }
+    .cta-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 30px;
+        animation: fadeIn 1s 0.9s forwards;
+        opacity: 0;
+    }
+    .btn {
+        padding: 18px 40px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        text-decoration: none;
+        display: inline-block;
+    }
+    .btn-primary {
+        background: linear-gradient(45deg, #ff8a00, #e52e71);
+        color: white;
+        box-shadow: 0 10px 25px rgba(233, 30, 99, 0.3);
+    }
+    .btn-primary:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 35px rgba(233, 30, 99, 0.4);
+    }
+    .btn-secondary {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(5px);
+    }
+    .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-3px);
+    }
+    .stats {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 60px;
+        animation: fadeIn 1s 1.2s forwards;
+        opacity: 0;
+    }
+    .stat-item {
+        text-align: center;
+    }
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(45deg, #ff8a00, #e52e71);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 5px;
+    }
+    .stat-label {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        letter-spacing: 1px;
+    }
+
+    /*======= TRENDING JOBS SECTION =======*/
+    .section {
+        padding: 100px 20px;
+        position: relative;
+    }
+    .jobs-section {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+    }
+    .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 60px;
+        position: relative;
+        display: inline-block;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: 'Montserrat', sans-serif;
+    }
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #ff8a00, #e52e71);
+        border-radius: 3px;
+    }
+    .jobs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        max-width: 1300px;
+        margin: 0 auto;
+    }
+    .job-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        padding: 35px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+    .job-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #ff8a00, #e52e71);
+    }
+    .job-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    .job-card h3 {
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+        color: #ff8a00;
+    }
+    .job-card .company {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+    .company-logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+    .job-card .company-info {
+        flex-grow: 1;
+    }
+    .job-card .company-name {
+        font-weight: 600;
+        margin-bottom: 3px;
+    }
+    .job-card .location {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .job-details {
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .detail-item {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 6px 18px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .salary {
+        color: #4CAF50;
+        font-weight: 600;
+    }
+    .job-card .time {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 0.8rem;
+        opacity: 0.7;
+    }
+    .view-all {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    /*======= CATEGORIES SECTION =======*/
+    .categories-section {
+        background: rgba(0, 0, 0, 0.2);
+    }
+    .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .category-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        padding: 30px 20px;
+        text-align: center;
+        transition: all 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .category-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    .category-icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        background: linear-gradient(45deg, #ff8a00, #e52e71);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    .category-card h3 {
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+    }
+    .category-card p {
+        font-size: 0.9rem;
+        opacity: 0.7;
+    }
+
+    /*======= TESTIMONIALS SECTION =======*/
+    .testimonials-section {
+        background: rgba(255, 255, 255, 0.03);
+    }
+    .testimonials-slider {
+        max-width: 1000px;
+        margin: 0 auto;
+        position: relative;
+    }
+    .testimonial-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 40px;
+        margin: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+    }
+    .testimonial-card::before {
+        content: '"';
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 5rem;
+        font-family: serif;
+        opacity: 0.1;
+        line-height: 1;
+    }
+    .testimonial-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 25px;
+        font-style: italic;
+        position: relative;
+        z-index: 1;
+    }
+    .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .author-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #ff8a00, #e52e71);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+    .author-info h4 {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+    .author-info p {
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+
+    /*======= FEATURES SECTION =======*/
+    .features-section {
+        background: rgba(0, 0, 0, 0.2);
+    }
+    .features-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+    }
+    .feature-card {
+        text-align: center;
+        padding: 30px;
+    }
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        background: linear-gradient(45deg, #ff8a00, #e52e71);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    .feature-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+    .feature-card p {
+        opacity: 0.8;
+        line-height: 1.7;
+    }
+
+    /*======= NEWSLETTER SECTION =======*/
+    .newsletter-section {
+        background: linear-gradient(135deg, rgba(111, 0, 255, 0.1) 0%, rgba(233, 30, 99, 0.1) 100%);
+    }
+    .newsletter-container {
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .newsletter-form {
+        display: flex;
+        gap: 10px;
+        margin-top: 30px;
+    }
+    .newsletter-form input {
+        flex-grow: 1;
+        padding: 15px 25px;
+        border-radius: 50px;
+        border: none;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        color: white;
+        font-size: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .newsletter-form input:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.25);
+    }
+    .newsletter-form button {
+        background: linear-gradient(45deg, #ff8a00, #e52e71);
+        border: none;
+        color: white;
+        padding: 15px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    .newsletter-form button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 138, 0, 0.4);
+    }
+
+    /*======= FOOTER =======*/
+    footer {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 60px 20px 30px;
+        text-align: center;
+    }
+    .footer-logo {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+        background: linear-gradient(45deg, #ff8a00, #e52e71);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+    }
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+    }
+    .footer-links a {
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+    .footer-links a:hover {
+        color: #ff8a00;
+    }
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    .social-links a {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+    }
+    .social-links a:hover {
+        background: linear-gradient(45deg, #ff8a00, #e52e71);
+        transform: translateY(-3px);
+    }
+    .copyright {
+        opacity: 0.6;
+        font-size: 0.9rem;
+    }
+
+    /*======= ANIMATIONS =======*/
+    @keyframes rotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    .pulse {
+        animation: pulse 2s infinite;
+    }
+
+    /*======= RESPONSIVE =======*/
+    @media (max-width: 768px) {
+        h1 { font-size: 3rem; }
+        .tagline { font-size: 1.3rem; }
+        .cta-buttons { flex-direction: column; align-items: center; }
+        .btn { width: 100%; max-width: 300px; text-align: center; }
+        .stats { flex-wrap: wrap; gap: 20px; }
+        .section-title { font-size: 2rem; }
+        .newsletter-form { flex-direction: column; }
+    }
+</style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Find Your Dream Tech Job Today</h1>
+            <p class="tagline">Join 10,000+ professionals who launched their careers with us</p>
+            
+            <!-- <div class="search-bar">
+                <input type="text" placeholder="Search for jobs, companies, or keywords...">
+                <button>Search</button>
+            </div> -->
+            
+            <div class="cta-buttons">
+                <a href="#jobs" class="btn btn-primary">Explore Jobs</a>
+                <a href="/login" class="btn btn-secondary">Login & SignUp</a>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Jobs Posted</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5K+</div>
+                    <div class="stat-label">Companies</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Candidates Hired</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Jobs Section -->
+    <section class="section jobs-section" id="jobs">
+        <h2 class="section-title">🚀 Trending Jobs</h2>
+
+        <div class="jobs-grid">
+            <a href="/job" class="job-card-link none">
+                <div class="job-card">
+                    <span class="time">2 days ago</span>
+                    <h3>Senior Product Designer</h3>
+                    <div class="company">
+                        <div class="company-logo">G</div>
+                        <div class="company-info">
+                            <div class="company-name">Google</div>
+                            <div class="location">📍 Remote</div>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span class="detail-item">UX/UI</span>
+                        <span class="detail-item">Figma</span>
+                        <span class="detail-item">Senior</span>
+                        <span class="detail-item salary">$130K+</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="/job" class="job-card-link none">
+                <div class="job-card">
+                    <span class="time">1 week ago</span>
+                    <h3>AI Engineer</h3>
+                    <div class="company">
+                        <div class="company-logo">M</div>
+                        <div class="company-info">
+                            <div class="company-name">Microsoft</div>
+                            <div class="location">📍 Bangalore</div>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span class="detail-item">Python</span>
+                        <span class="detail-item">TensorFlow</span>
+                        <span class="detail-item">ML</span>
+                        <span class="detail-item salary">₹25L+</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="/job" class="job-card-link none">
+                <div class="job-card">
+                    <span class="time">3 days ago</span>
+                    <h3>DevOps Specialist</h3>
+                    <div class="company">
+                        <div class="company-logo">A</div>
+                        <div class="company-info">
+                            <div class="company-name">Amazon</div>
+                            <div class="location">📍 Hybrid</div>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span class="detail-item">AWS</span>
+                        <span class="detail-item">Kubernetes</span>
+                        <span class="detail-item">CI/CD</span>
+                        <span class="detail-item salary">$140K+</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="/job" class="job-card-link none">
+                <div class="job-card">
+                    <span class="time">Just now</span>
+                    <h3>Frontend Developer</h3>
+                    <div class="company">
+                        <div class="company-logo">F</div>
+                        <div class="company-info">
+                            <div class="company-name">Facebook</div>
+                            <div class="location">📍 San Francisco</div>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span class="detail-item">React</span>
+                        <span class="detail-item">TypeScript</span>
+                        <span class="detail-item">Mid-level</span>
+                        <span class="detail-item salary">$120K+</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="/job" class="job-card-link none">
+                <div class="job-card">
+                    <span class="time">5 days ago</span>
+                    <h3>Data Scientist</h3>
+                    <div class="company">
+                        <div class="company-logo">N</div>
+                        <div class="company-info">
+                            <div class="company-name">Netflix</div>
+                            <div class="location">📍 Remote</div>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span class="detail-item">Python</span>
+                        <span class="detail-item">SQL</span>
+                        <span class="detail-item">Analytics</span>
+                        <span class="detail-item salary">$150K+</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="/job" class="job-card-link none">
+                <div class="job-card">
+                    <span class="time">1 day ago</span>
+                    <h3>Backend Engineer</h3>
+                    <div class="company">
+                        <div class="company-logo">S</div>
+                        <div class="company-info">
+                            <div class="company-name">Spotify</div>
+                            <div class="location">📍 New York</div>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span class="detail-item">Node.js</span>
+                        <span class="detail-item">MongoDB</span>
+                        <span class="detail-item">Senior</span>
+                        <span class="detail-item salary">$135K+</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <div class="view-all">
+            <a href="/job" class="btn btn-secondary ">View All Jobs</a>
+        </div>
+    </section>
+
+    <!-- Job Categories Section -->
+    <section class="section categories-section">
+        <h2 class="section-title">💼 Popular Categories</h2>
+        
+        <div class="categories-grid">
+            <div class="category-card">
+                <div class="category-icon">👨‍💻</div>
+                <h3>Software Development</h3>
+                <p>1,200+ Jobs Available</p>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">🤖</div>
+                <h3>AI & Machine Learning</h3>
+                <p>850+ Jobs Available</p>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">🎨</div>
+                <h3>UX/UI Design</h3>
+                <p>650+ Jobs Available</p>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">🔒</div>
+                <h3>Cyber Security</h3>
+                <p>420+ Jobs Available</p>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">📊</div>
+                <h3>Data Science</h3>
+                <p>780+ Jobs Available</p>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">☁️</div>
+                <h3>Cloud Computing</h3>
+                <p>550+ Jobs Available</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials-section">
+        <h2 class="section-title">🌟 Success Stories</h2>
+        
+        <div class="testimonials-slider">
+            <div class="testimonial-card">
+                <p class="testimonial-content">I found my dream job within 2 weeks of using this platform. The application process was seamless and the job recommendations were spot on based on my skills and preferences.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">S</div>
+                    <div class="author-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>Senior Product Designer at Google</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features-section">
+        <h2 class="section-title">✨ Why Choose Us</h2>
+        
+        <div class="features-container">
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Fast Hiring</h3>
+                <p>Our streamlined process helps you get hired faster with direct connections to top employers.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Smart Matching</h3>
+                <p>Our AI matches you with jobs that fit your skills, experience, and career goals perfectly.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Privacy Focused</h3>
+                <p>Your data is always secure and you control who sees your profile and information.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="section newsletter-section">
+        <h2 class="section-title">📩 Stay Updated</h2>
+        
+        <div class="newsletter-container">
+            <p>Subscribe to our newsletter for the latest job opportunities and career advice.</p>
+            
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address">
+                <button type="submit" class="pulse">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">JobPortal</div>
+        
+        <div class="footer-links">
+            <a href="/about">About Us</a>
+            <a href="/jobs">Browse Jobs</a>
+            <a href="/companies">Companies</a>
+            <a href="/blog">Career Blog</a>
+            <a href="/contact">Contact</a>
+            <a href="/privacy">Privacy Policy</a>
+        </div>
+        
+        <div class="social-links">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 JobPortal. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for CTA button
+        document.querySelector('.btn-primary').addEventListener('click', (e) => {
+            if (e.target.hash === '#jobs') {
+                e.preventDefault();
+                document.querySelector(e.target.hash).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+        
+        // Animation for job cards
+        const jobCards = document.querySelectorAll('.job-card');
+        jobCards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+            card.style.opacity = '0';
+            card.style.animation = 'fadeIn 0.5s forwards';
+        });
+        
+        // Add Font Awesome for social icons
+        const faScript = document.createElement('script');
+        faScript.src = 'https://kit.fontawesome.com/a076d05399.js';
+        document.head.appendChild(faScript);
+    </script>
+</body>
